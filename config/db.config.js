@@ -1,3 +1,6 @@
-const notificationServiceDbUri = "mongodb+srv://bhaweshg0777:RJqSUUWVgkuHcApK@notificationservice.f89ceep.mongodb.net/?retryWrites=true&w=majority";
+//"mongodb://127.0.0.1:27017/<db_name>";
+require('dotenv').config();
 
-module.exports = {db_uri : notificationServiceDbUri};
+const notificationServiceDbUri = 'mongodb+srv://bhaweshg0777:RJqSUUWVgkuHcApK@notificationservice.f89ceep.mongodb.net/?retryWrites=true&w=majority';
+const dbName = "crmapp-db";
+module.exports = { db_uri: notificationServiceDbUri, dbName };

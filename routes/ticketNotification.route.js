@@ -1,9 +1,6 @@
-const ticketNotificationController  = require("../controller/ticketNotification.controller");
+const ticketNotificationController = require('../controllers/ticketNotification.controller');
 
-const ticketNotificationRoute = (app) => {
-    app.post("/notificationService/api/v1/notification" , ticketNotificationController.createTicketNotification);
-}
-
-module.exports = {
-    ticketNotificationRoute
+module.exports = function(app){
+    // to create a notification
+    app.post('/notificationService/api/v1/notification', ticketNotificationController.createTicketNotification);
 }

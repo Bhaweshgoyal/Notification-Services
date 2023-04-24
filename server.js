@@ -1,20 +1,25 @@
-const express = require("express"); 
+const express = require('express');
 const app = express();
-const {PORT} = require("./config/server.config")
-const {db_uri} = require("./config/db.config")
+const {PORT} = require('./config/server.config');
+const {db_uri} = require('./config/db.config');
 const mongoose = require('mongoose');
-const {ticketNotificationRoute} = require("./routes/ticketNotification.route");
+const notificationRoutes = require('./routes/ticketNotification.route');
 const bodyParser = require('body-parser');
-const {job} = require("./crons/ticketNotification.cron");
-const nodemailer = require('nodemailer');
+const cronJob =  require('./crons/ticketNotificationCron');
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.urlencoded({extended:true}));
 
-ticketNotificationRoute(app);
+//registring the routes
+notificationRoutes(app);
 
-app.listen(PORT  , () => {
-    console.log("Conection Build successfully  " ,PORT );
+
+//starting the app to listen the given port 
+app.listen(PORT, () => {
+    console.log("Application is listening to the port ", PORT);
+    
+    //connect mongoose with mongo db
     mongoose.connect(db_uri);
-    job.start()
+    cronJob.start();
 })
 
